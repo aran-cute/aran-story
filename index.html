@@ -7,27 +7,118 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#cfe6f7; --bg2:#e4f1fb; --ink:#35566f; --bear:#f9bcd3; --bear-d:#f08fb4; --blush:#f4799f; --nose:#c95a82;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --sky1:#bfe0f8; --sky2:#e6f4fd; --ink:#3f5f7c; --card:#fffdfe; --cloud:#ffffff; --spark:#ffffff; --heart:#ff7fae; --bar:#ff9ec3; --track:rgba(255,255,255,.7);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#1c2e3f; --bg2:#27415a; --ink:#e2f0fb; --bear:#f4a9c6; --bear-d:#e27da6; }
+  :root:not([data-theme="light"]){ --sky1:#17283a; --sky2:#27435e; --ink:#e6f2fc; --card:#2d4a66; --cloud:#34536f; --spark:#cfe6ff; --track:rgba(255,255,255,.15); }
 }
-:root[data-theme="dark"]{ --bg:#1c2e3f; --bg2:#27415a; --ink:#e2f0fb; --bear:#f4a9c6; --bear-d:#e27da6; }
+:root[data-theme="dark"]{ --sky1:#17283a; --sky2:#27435e; --ink:#e6f2fc; --card:#2d4a66; --cloud:#34536f; --spark:#cfe6ff; --track:rgba(255,255,255,.15); }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{
-  background:radial-gradient(120% 90% at 50% 0%, var(--bg2), var(--bg));
-  color:var(--ink); font-family:"Vazirmatn","Noto Naskh Arabic",Tahoma,sans-serif;
-  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-  overflow:hidden; -webkit-tap-highlight-color:transparent;
+  background:linear-gradient(180deg,var(--sky1),var(--sky2)); color:var(--ink);
+  font-family:"Vazirmatn","Noto Naskh Arabic",Tahoma,sans-serif;
+  display:flex; flex-direction:column; align-items:center; overflow:hidden; position:relative; -webkit-tap-highlight-color:transparent;
 }
-.stage{flex:1; width:100%; max-width:34rem; display:flex; align-items:center; justify-content:center; padding:2rem 1.75rem 0}
-#line{
-  margin:0; text-align:center; font-size:clamp(1.35rem,5.2vw,1.9rem); line-height:2; font-weight:600;
-  white-space:pre-line; opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease;
+.bar{position:absolute; top:calc(env(safe-area-inset-top,0px) + 12px); left:7%; right:7%; height:8px; border-radius:8px; background:var(--track); overflow:hidden; z-index:3}
+.bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,#ffc1d9,var(--bar)); border-radius:8px; transition:width .5s ease; float:right}
+.cloud{position:absolute; background:var(--cloud); border-radius:60px; opacity:.9; animation:drift linear infinite}
+.cloud::before,.cloud::after{content:""; position:absolute; background:inherit; border-radius:50%}
+.cloud::before{width:55%; aspect-ratio:1; top:-45%; left:14%}
+.cloud::after{width:42%; aspect-ratio:1; top:-30%; right:14%}
+.c1{width:130px; height:38px; top:12%; animation-duration:70s; animation-delay:-20s}
+.c2{width:90px; height:28px; top:30%; animation-duration:55s; animation-delay:-40s; opacity:.7}
+.c3{width:160px; height:44px; top:58%; animation-duration:85s; animation-delay:-5s; opacity:.6}
+@keyframes drift{from{transform:translateX(-60vw)}to{transform:translateX(160vw)}}
+.sp{position:absolute; color:var(--spark); font-size:18px; animation:tw 3s ease-in-out infinite; opacity:.8}
+@keyframes tw{0%,100%{opacity:.2; transform:scale(.7)}50%{opacity:1; transform:scale(1.15)}}
+.stage{flex:1; width:100%; max-width:34rem; display:flex; align-items:flex-end; justify-content:center; padding:4.5rem 1.4rem 0; z-index:2; min-height:0}
+#bubble{
+  position:relative; width:100%; min-height:9.5rem; max-height:100%; overflow:auto; background:var(--card); border-radius:32px; padding:1.6rem 1.5rem; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 30px rgba(90,150,200,.25), 0 0 0 4px rgba(255,255,255,.55); transform:scale(.6); opacity:0; transition:none;
 }
-#line.on{opacity:1; transform:none}
-.dock{padding:1rem 0 1.5rem; display:flex; justify-content:center}
-#bear{
+#bubble.on{animation:bpop .55s cubic-bezier(.2,1.5,.4,1) forwards}
+#bubble::after{content:""; position:absolute; bottom:-16px; left:50%; margin-left:-18px; border:18px solid transparent; border-top-color:var(--card); border-bottom:0}
+#line{margin:0; text-align:center; font-size:clamp(1.3rem,5vw,1.8rem); line-height:2; font-weight:600; white-space:pre-line}
+@keyframes bpop{0%{transform:scale(.6) translateY(20px); opacity:0}100%{transform:none; opacity:1}}
+.dock{z-index:2; padding:1.6rem 0 1.2rem; display:flex; justify-content:center; position:relative}
+#bear{background:none; border:0; padding:0; cursor:pointer; width:min(52vw,12rem); aspect-ratio:1; border-radius:50%; animation:float 3s ease-in-out infinite; filter:drop-shadow(0 12px 12px rgba(255,126,174,.35))}
+#bear:focus-visible{outline:3px solid var(--bar); outline-offset:6px}
+#bear.pop{animation:squish .5s ease}
+#bear svg{width:100%; height:100%; display:block; overflow:visible}
+.blink{animation:blink 4s infinite; transform-box:fill-box; transform-origin:center}
+.ring{position:absolute; inset:auto; width:min(60vw,14rem); aspect-ratio:1; border-radius:50%; border:3px solid #fff; opacity:0; animation:ring 2.4s ease-out infinite; pointer-events:none}
+.ring.off{display:none}
+@keyframes ring{0%{transform:scale(.6); opacity:.8}100%{transform:scale(1.15); opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+@keyframes squish{0%{transform:scale(1)}30%{transform:scale(.84,1.14)}60%{transform:scale(1.1,.92)}100%{transform:scale(1)}}
+<span class="sp" style="top:70%;right:18%;animation-delay:-2s">✦</span><span class="sp" style="top:34%;left:30%;animation-delay:-.5s;font-size:12px">✧</span>
+<main class="stage"><div id="bubble"><p id="line" aria-live="polite"></p></div></main>
+<div class="dock">
+  <span class="ring" id="ring"></span>
+  <button id="bear" aria-label="next">
+    <svg viewBox="0 0 220 220" aria-hidden="true">
+      <circle cx="52" cy="56" r="32" fill="#ffc1d9"/><circle cx="52" cy="58" r="17" fill="#ff9ec3" opacity=".6"/>
+      <circle cx="168" cy="56" r="32" fill="#ffc1d9"/><circle cx="168" cy="58" r="17" fill="#ff9ec3" opacity=".6"/>
+      <ellipse cx="110" cy="172" rx="56" ry="42" fill="#ffc1d9"/>
+      <ellipse cx="110" cy="180" rx="34" ry="27" fill="#fff" opacity=".55"/>
+      <ellipse cx="66" cy="168" rx="16" ry="21" fill="#ffc1d9" transform="rotate(25 66 168)"/>
+      <ellipse cx="154" cy="168" rx="16" ry="21" fill="#ffc1d9" transform="rotate(-25 154 168)"/>
+      <path d="M110 196 C88 180 86 163 99 161 C106 160 110 164 110 168 C110 164 114 160 121 161 C134 163 132 180 110 196Z" fill="#ff6fa5"/>
+      <ellipse cx="110" cy="102" rx="72" ry="64" fill="#ffc1d9"/>
+      <g class="blink"><ellipse cx="82" cy="102" rx="10" ry="12.5" fill="#3b2540"/><ellipse cx="138" cy="102" rx="10" ry="12.5" fill="#3b2540"/></g>
+      <circle cx="85.5" cy="96" r="4" fill="#fff"/><circle cx="79" cy="107" r="2" fill="#fff"/>
+      <circle cx="141.5" cy="96" r="4" fill="#fff"/><circle cx="135" cy="107" r="2" fill="#fff"/>
+      <ellipse cx="62" cy="124" rx="12" ry="7.5" fill="#ff7fa8" opacity=".55"/><ellipse cx="158" cy="124" rx="12" ry="7.5" fill="#ff7fa8" opacity=".55"/>
+      <ellipse cx="110" cy="116" rx="6.5" ry="4.8" fill="#c95a82"/>
+      <path d="M100 124 q5 7 10 0 q5 7 10 0" stroke="#3b2540" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <ellipse cx="62" cy="34" rx="14" ry="8" transform="rotate(-28 62 34)" fill="#ff6fa5"/>
+      <ellipse cx="86" cy="34" rx="14" ry="8" transform="rotate(28 86 34)" fill="#ff6fa5"/>
+      <circle cx="74" cy="37" r="6" fill="#ff4f93"/>
+    </svg>
+  </button>
+</div>
+<script>
+var S = [
+"لە 1\\1\\2007 کورێک هاتە ژیان",
+"ڕوحێکی پاک دڵێکی سپی وەک بەفر",
+"دوای گەوربوونی وردە وردە هەستی گرد جیاوازە",
+"لە ناخی خۆی هێشتیە هەوڵیدا نهێنیبێت",
+"بەڵام ڕۆژێک لە ڕۆژان بیریکردوە",
+"ئامادەیە دڵە پاکەکی لەناو دەستەکانی دابنێ",
+"ئەو کەسە دڵکی گەوریە هەیە کە تێیدا بمێنێتەوە",
+"دڵێک وەگ قۆریەکی حەلادین ههههه هەموو شتێکی تێدابێت هههههه",
+"وە مێشکێک کە بەرگەی پرتە پرتەکەی بگرێ 😳",
+"چاوێک بەرگەی جوانیەکی بگرێ",
+"گوێیەک بەرگەی دەنگە و نازاکانی بگرێت",
+"پەنجەیەک کە هەست بە نەرمی ڕوومەتەکانی بکەت",
+"بەڵێ ڕۆژێک ئەوکەسە دێت وەک.،،،،",
+"سوارچاکێک بەڵام بە ئوتۆمبێلێکی تێسلا ههههههههه چونکە مۆدیل ئەسپ نەماوە 😁",
+"بەیەکەوە دەبن لە باوشێکی گەرم ماڵێکی پڕ لە خۆشەویستی دڵێکی پر لە میهرەبانی",
+"ئەو ڕۆژە دێ ئاران تەنها چاوێبە ژیانت وەک ناوت جوان و ئارام و پڕ لە گوڵی گەشاوە دەبێت",
+"خوا حافیز خۆشەویستم😘"
+];
+var i=-1, line=document.getElementById("line"), bubble=document.getElementById("bubble"), bear=document.getElementById("bear"),
+    prog=document.getElementById("prog"), ring=document.getElementById("ring"), busy=false;
+function hearts(){
+  var r=bear.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height*.3, g=["♥","♡","✦"];
+  for(var k=0;k<7;k++){
+    var s=document.createElement("span"); s.className="h"; s.textContent=g[k%3];
+    s.style.left=cx+"px"; s.style.top=cy+"px";
+    s.style.setProperty("--dx",((Math.random()-.5)*190)+"px"); s.style.setProperty("--dy",(-60-Math.random()*130)+"px");
+    s.style.fontSize=(14+Math.random()*14)+"px";
+    document.body.appendChild(s); setTimeout(function(e){e.remove()}.bind(null,s),1200);
+  }
+}
+bear.addEventListener("click",function(){
+  if(busy) return; busy=true; ring.classList.add("off");
+  bear.classList.remove("pop"); void bear.offsetWidth; bear.classList.add("pop"); hearts();
+  i=(i+1)%S.length; prog.style.width=((i+1)/S.length*100)+"%";
+  bubble.classList.remove("on"); void bubble.offsetWidth;
+  line.textContent=S[i]; bubble.scrollTop=0; bubble.classList.add("on");
+  setTimeout(function(){busy=false},250);
+});
+</script>
+</body>
+</html>
