@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aran's Story 💗</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:20px;
+ font-family:Tahoma,Arial,sans-serif;color:#874566;
+ background:linear-gradient(135deg,#ffe4ef,#f3e5ff,#fff1f7);
+ overflow-x:hidden
+}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.heart{position:absolute;bottom:-30px;animation:up 9s linear forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+.card{
+ width:100%;max-width:480px;text-align:center;padding:30px 20px;
+ border:1px solid white;border-radius:28px;
+ background:#ffffffc9;box-shadow:0 15px 50px #b86c9630
+}
+h1{font-size:30px;color:#d96c9e;margin:8px}
+.sub{color:#bd80a0;font-size:13px}
+.flower{font-size:48px;margin:18px}
+#text{
+ min-height:180px;display:flex;align-items:center;justify-content:center;
+ font-size:22px;line-height:2;padding:12px 2px;
+ animation:fade .5s
+}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+button{
+ font-family:inherit;border:0;border-radius:30px;padding:12px 20px;
+ margin:5px;cursor:pointer;font-size:14px
+}
+.main{background:linear-gradient(110deg,#ed8fba,#b59af1);color:white}
+.other{background:#fff0f7;color:#a85e86;border:1px solid #f2c9df}
+#progress{height:5px;background:#f5dce9;border-radius:9px;overflow:hidden;margin:15px 0}
+#bar{height:100%;width:0;background:#e58cb7;transition:width .3s}
+#story{display:none}
+.small{font-size:11px;color:#c18aa6;margin-top:16px}
+</style>
+</head>
+
+<body>
+<div class="hearts" id="hearts"></div>
+
+<main class="card">
+ <div class="sub">A LITTLE STORY, A LOT OF LOVE</div>
+ <h1>Aran's Story ♡</h1>
+ <div class="sub">چیڕۆکێک لە دڵەوە بۆ تۆ، ئاران 🌸</div>
+
+ <section id="cover">
+  <div class="flower">💗🌷</div>
+  <h2>بۆ ئاران...</h2>
+  <p style="line-height:2">
+   هەندێک چیڕۆک بە وشە دەست پێدەکەن،<br>
+   بەڵام لە دڵدا دەمێننەوە... 🤍
+  </p>
+  <button class="main" onclick="start()">با چیڕۆکەکە دەست پێ بکات ♡</button>
+ </section>
+
+ <section id="story">
+  <div id="count" class="sub"></div>
+  <div id="progress"><div id="bar"></div></div>
+  <div id="text"></div>
+  <div style="color:#df8bb6">♡ ✧ ♡</div>
+  <div>
+   <button class="other" onclick="prev()">پێشوو</button>
+   <button class="main" id="next" onclick="advance()">دواتر ♡</button>
+  </div>
+ </section>
+
+ <button class="other" id="music" onclick="toggleMusic()">🎵 میوزیکی ئارام: دەستپێبکە</button>
+ <div class="small">Made with ♡ especially for Aran</div>
+</main>
+
+<script>
+const lines = [
+"لە 1/1/2007 کورێک هاتە ژیان... 🌸",
+"ڕوحێکی پاک، دڵێکی سپی وەک بەفر. 🤍",
+"دوای گەورەبوونی، وردە وردە هەستی کرد جیاوازە.",
+"لە ناخی خۆیدا هێشتییەوە و هەوڵی دا نهێنی بێت.",
+"بەڵام ڕۆژێک لە ڕۆژان بیرێکی کردەوە...",
+"بۆچی من وام؟؟ بۆچیی؟؟؟ ئایا من هەڵەم؟ وابم؟",
+"نااا! من وەک خۆم دەژیم، نەک وەک ئەوەی ئەوان دەیانەوێت.",
+"نهێنییەکەی ئاشکرا کرد؛ ئەوەی چەند ساڵێک لە دڵی پاکیدا هەڵی گرتبوو.",
+"پێی وابوو هەموو کەسێک لە هەستەکانی تێدەگات و لایان ئاسایی دەبێت.",
+"بەڵام...",
+"پێچەوانەکەی دەرچوو؛ دژایەتی، قبوڵنەکردن، فشاری دەروونی و هەستی نامۆبوون.",
+"بۆ ساتێک وەستا و بیرێکی کردەوە: ئایا من هەڵەم؟ ئایا کێشەیەکی گەورەم دروست کردووە؟",
+"پرسیار و پرسیار و پرسیار... بۆچی؟ بۆچی؟ بۆچی؟",
+"بڕیاری دا ڕووبەڕووی کۆمەڵگە ببێتەوە و ئەو ژیانە بژی کە خۆی هەڵیدەبژێرێت.",
+"هەزاران و هەزاران نیشانی پرسیار لەسەری کۆبوونەوە.",
+"کۆمەڵگەی دەپرسی: بۆچی وای؟ بۆچی وا لە خۆت دەکەیت؟ تۆ پیاویت، نابێت وا بیت؟؟؟",
+"بەڵام کەس نەیپرسی پرسیارێکی گرنگ...",
+"پێت ویست یارمەتی بدەم؟ دەتەوێت لە ژێر بارانی نەرم پیاسە بکەین تا ئاسوودە بیت؟ 🌧️",
+"دەتەوێت گوڵ بچێنین؟ یان فیلمێک ببینین کە بە دڵی تۆ بێت؟ 🌷",
+"حەزت لە چ چالاکییەکە؟ چ ئاژەڵێکت بە دڵە؟ 🐈",
+"ناااا! واز لە پرسیارەکان بێنە! 😂",
+"تەنها باوەشێکی ئارام لە بەهاردا... باوەشێکی گەرم لە سەرمای زستاندا، کە بە ئارامی تێیدا بخەویت. 🫂",
+"بە هەرحاڵ، ڕۆژێک دێت... بەڵێ، بەڵێ، ڕۆژێک دێت.",
+"نیوەکەی خۆت دەدۆزیتەوە؛ کە قبووڵت دەکات وەک خۆت. 🤍",
+"کە ئامادە بێت قژت شانە بکات.",
+"ئامادەیە دڵە پاکەکەت لە ناو دەستەکانی دابنێیت؟ 💗",
+"ئەو کەسە دڵێکی گەورەی هەیە کە تۆی تێدا جێ دەبێتەوە.",
+"دڵێک وەک قۆڕیەکی حەلادین هههههه 😂 هەموو شتێکی تێدابێت!",
+"مێشکێک کە بەرگەی پرتە پرتەکەی بگرێت. 😳",
+"چاوێک کە بەرگەی جوانییەکەی بگرێت. ✨",
+"گوێیەک کە بەرگەی دەنگ و نازەکانی بگرێت.",
+"پەنجەیەک کە هەست بە نەزمی ڕووخسارەکانی بکات. 🌸",
+"بەڵێ، ڕۆژێک ئەو کەسە دێت وەک...",
+"سوارچاکێک! بەڵام بە ئۆتۆمبێلێکی تێسلا ههههههه، چونکە مۆدێلی ئەسپ نەماوە! 😂🚘",
+"پێکەوە دەبن، لە باوەشێکی گەرم، ماڵێکی پڕ لە خۆشەویستی و دڵێکی پڕ لە میهرەبانی. 🏡💗",
+"ئەو ڕۆژە دێت ئاران... ژیانێک بە ناوێکی جوان و ئارام، پڕ لە گوڵی گەشاوە. 🌷",
+"خوا حافیز، ئاران... تا چیڕۆکێکی دیکە. ♡"
+];
+
+let i = 0;
+let ctx = null;
+let playing = false;
+let timer = null;
+let note = 0;
+
+function start(){
+ document.getElementById('cover').style.display='none';
+ document.getElementById('story').style.display='block';
+ i=0;show();
+}
+function show(){
+ const t=document.getElementById('text');
+ t.style.animation='none';void t.offsetWidth;t.style.animation='fade .5s';
+ t.textContent=lines[i];
+ document.getElementById('count').textContent=`بەشی ${i+1} لە ${lines.length}`;
+ document.getElementById('bar').style.width=((i+1)/lines.length*100)+'%';
+ document.getElementById('next').textContent=i===lines.length-1?'♡ لە سەرەتاوە':'دواتر ♡';
+}
+function advance(){if(i===lines.length-1){i=0}else{i++}show();burst()}
+function prev(){if(i>0){i--;show()}}
+function floatHeart(){
+ const e=document.createElement('span');
+ e.className='heart';
+ e.textContent=['♡','♥','✿','✨','🌸'][Math.floor(Math.random()*5)];
+ e.style.left=Math.random()*100+'%';
+ e.style.fontSize=(14+Math.random()*16)+'px';
+ e.style.animationDuration=(6+Math.random()*6)+'s';
+ document.getElementById('hearts').appendChild(e);
+ setTimeout(()=>e.remove(),13000);
+}
+setInterval(floatHeart,900);
+function burst(){for(let j=0;j<6;j++)setTimeout(floatHeart,j*100)}
+
+/* میوزیکی نەرم بە پیانۆی دیجیتاڵ */
+async function toggleMusic(){
+ const btn=document.getElementById('music');
+ try{
+  if(playing){
+   clearInterval(timer);timer=null;
+   if(ctx)await ctx.suspend();
+   playing=false;
+   btn.textContent='🎵 میوزیکی ئارام: دەستپێبکە';
+   return;
+  }
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC){btn.textContent='ئەم وێبگەڕە میوزیک پشتگیری ناکات';return}
+  if(!ctx)ctx=new AC();
+  await ctx.resume();
+  playing=true;
+  btn.textContent='🎵 میوزیک لە کاردایە — بیوەستێنە';
+  const notes=[261.63,329.63,392,329.63,293.66,349.23,440,349.23];
+  function play(){
+   if(!playing||ctx.state!=='running')return;
+   const osc=ctx.createOscillator();
+   const gain=ctx.createGain();
+   const now=ctx.currentTime;
+   osc.type='sine';
+   osc.frequency.value=notes[note++%notes.length];
+   gain.gain.setValueAtTime(.0001,now);
+   gain.gain.exponentialRampToValueAtTime(.035,now+.15);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+1.4);
+   osc.connect(gain);gain.connect(ctx.destination);
+   osc.start(now);osc.stop(now+1.5);
+  }
+  play();timer=setInterval(play,1000);
+ }catch(e){
+  playing=false;
+  btn.textContent='🎵 دووبارە بۆ میوزیک کرتە بکە';
+ }
+}
+</script>
+</body>
+</html>
