@@ -19,36 +19,34 @@ body {
   align-items: center;
   justify-content: center;
   font-family: Tahoma, Arial, sans-serif;
-  color: #75415d;
-  background: linear-gradient(135deg, #ffe8f1, #eee4ff, #fff1f7);
-  overflow-x: hidden;
-}
-
-.hearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
+  color: #78445e;
+  background:
+    radial-gradient(circle at top left, #fff8fc, transparent 40%),
+    linear-gradient(145deg, #ffe4ef, #f1e5ff, #fff0f6);
   overflow: hidden;
 }
 
-.heart {
-  position: absolute;
-  bottom: -40px;
-  color: #e07aa8;
-  opacity: .5;
-  animation: floatUp 12s linear infinite;
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
 }
 
-@keyframes floatUp {
-  from {
+.petal {
+  position: absolute;
+  bottom: -50px;
+  animation: float 12s linear infinite;
+  opacity: .55;
+}
+
+@keyframes float {
+  0% {
     transform: translateY(0) rotate(0deg);
     opacity: 0;
   }
-  20% {
-    opacity: .5;
-  }
-  to {
-    transform: translateY(-115vh) rotate(40deg);
+  15% { opacity: .6; }
+  100% {
+    transform: translateY(-115vh) rotate(180deg);
     opacity: 0;
   }
 }
@@ -57,40 +55,51 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 600px;
-  padding: 30px 22px;
+  max-width: 540px;
+  padding: 30px 22px 24px;
   text-align: center;
-  border-radius: 28px;
-  background: rgba(255,255,255,.8);
-  border: 1px solid white;
-  box-shadow: 0 15px 50px rgba(180,100,145,.18);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 32px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 20px 60px rgba(177,101,145,.2);
+  backdrop-filter: blur(12px);
 }
 
-.flowers {
-  font-size: 34px;
-  margin-bottom: 12px;
+.decor {
+  font-size: 30px;
+  letter-spacing: 5px;
 }
 
 h1 {
-  margin: 8px 0 25px;
-  color: #cb5d91;
-  font-size: 30px;
+  margin: 12px 0 24px;
+  color: #cb5a91;
+  font-size: 29px;
+  text-shadow: 0 2px 10px #f8d4e5;
+}
+
+.line {
+  width: 80px;
+  height: 3px;
+  margin: -12px auto 25px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #e6a1c3, #c6a5ed);
 }
 
 .story-box {
-  min-height: 200px;
-  padding: 25px 16px;
+  min-height: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 22px;
-  background: #fff1f7;
-  border: 1px solid #f5d4e4;
+  padding: 24px 15px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fff5fa, #f9f1ff);
+  border: 1px solid #f4d6e6;
 }
 
 #story {
   font-size: 21px;
   line-height: 2.1;
+  color: #78445e;
   transition: opacity .3s, transform .3s;
 }
 
@@ -102,77 +111,79 @@ h1 {
 .counter {
   margin-top: 16px;
   font-size: 13px;
-  color: #ad6386;
+  color: #b16c90;
 }
 
 .progress {
   height: 5px;
-  margin: 12px 0 22px;
+  margin: 12px 0 23px;
+  background: #f5dce9;
+  border-radius: 10px;
   overflow: hidden;
-  border-radius: 20px;
-  background: #f5d6e5;
 }
 
 #bar {
   height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #e07aa8, #b89ae9);
-  transition: width .3s;
+  width: 0;
+  background: linear-gradient(90deg, #e68db6, #b8a0ed);
+  transition: width .35s;
 }
 
 .buttons {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 button {
+  border: 0;
+  border-radius: 30px;
+  padding: 13px 21px;
   font-family: inherit;
   font-size: 15px;
-  padding: 12px 20px;
-  border-radius: 30px;
-  border: none;
   cursor: pointer;
+  transition: transform .2s;
+}
+
+button:active {
+  transform: scale(.96);
 }
 
 .primary {
   color: white;
-  background: linear-gradient(135deg, #e07aa8, #c77bb8);
-  box-shadow: 0 5px 15px #f0c5dc;
+  background: linear-gradient(135deg, #e58ab4, #c780bb);
+  box-shadow: 0 5px 18px rgba(210,115,166,.25);
 }
 
 .secondary {
-  color: #a4537c;
+  color: #a65d82;
   background: #fff0f7;
-  border: 1px solid #f3d0e2;
-}
-
-button:active {
-  transform: scale(.97);
+  border: 1px solid #f1d1e2;
 }
 
 #music {
   margin-top: 15px;
 }
 
-.footer {
-  margin-top: 23px;
-  color: #b06488;
-  font-size: 14px;
+.bottom-flowers {
+  margin-top: 22px;
+  font-size: 20px;
+  letter-spacing: 5px;
 }
 
-@media(max-width:420px) {
+@media(max-width: 420px) {
   .card {
-    padding: 25px 15px;
+    padding: 25px 15px 20px;
   }
-
   h1 {
-    font-size: 26px;
+    font-size: 25px;
   }
-
   #story {
     font-size: 18px;
+  }
+  .story-box {
+    min-height: 200px;
   }
 }
 </style>
@@ -180,18 +191,20 @@ button:active {
 
 <body>
 
-<div class="hearts" id="hearts"></div>
+<div class="petals" id="petals"></div>
 
 <main class="card">
-  <div class="flowers">🌸 💗 🌸</div>
+  <div class="decor">🌸 ♡ 🌸</div>
 
-  <h1>ئارانی جوانکیلە 🌸💗</h1>
+  <h1>ئارانی جوانکیلە 💗</h1>
+
+  <div class="line"></div>
 
   <div class="story-box">
-    <div id="story">کرتەیەک بکە، جوانکیلە 💗</div>
+    <div id="story">ئارانی جوانکیلە، ئامادەی؟ 💕</div>
   </div>
 
-  <div class="counter" id="counter">بە دڵەوە بۆ تۆ 🌷</div>
+  <div class="counter" id="counter">بە دڵەوە ❤️</div>
 
   <div class="progress">
     <div id="bar"></div>
@@ -204,44 +217,29 @@ button:active {
 
   <button class="secondary" id="music">♫ دەنگی ئارام چالاک بکە</button>
 
-  <div class="footer">🌷 💗 🌷</div>
+  <div class="bottom-flowers">🌷 💗 🌷</div>
 </main>
 
 <script>
 const sentences = [
   "لە ڕۆژی ١/١/٢٠٠٧، کوڕێک لەدایک بوو. 🌙",
-  "ڕۆحێکی پاک، دڵێک سپی وەک بەفر، و هەستێکی جوان لە ناخیدا هەبوو. 🤍",
-  "بە تێپەڕبوونی کات، ئەو کوڕە گەورەتر دەبوو و جیهانیش بۆی فراوانتر دەبوو.",
-  "لە ناو دڵیدا هەست و بیرکردنەوەی تایبەتی هەبوون.",
-  "هەندێ جار هەستی دەکرد کە وشەکان ناتوانن هەموو ئەوەی لە دڵیدایە دەرببڕن.",
-  "بۆیە هەندێ شت لە ناخیدا دەهێشتەوە و بێدەنگ دەبوو. 💭",
-  "بەڵام دڵ هەمیشە ڕازەکانی خۆی بە تەواوی ناشارێتەوە.",
-  "ڕۆژێک هات کە لە خۆی پرسی: بۆچی من وا هەستم هەیە؟",
-  "بۆچی هەندێ هەست ئەوەندە قووڵن کە بە وشە باس ناکرێن؟",
-  "لەگەڵ هەموو ئەو پرسیارانە، هێشتا هیوای بە ڕۆژانی جوان هەبوو. 🌷",
-  "چونکە هەر کەسێک شایەنی ئارامی، خۆشی و خۆشەویستییە.",
-  "هەندێ جار تەنها پێویستە کەسێک گوێت لێ بگرێت و بە دڵەوە تێت بگات.",
-  "کەسێک کە لەگەڵیدا بتوانیت خۆت بیت، بەبێ ترس و شاردنەوە.",
+  "ڕۆحێکی پاک و دڵێک سپی وەک بەفر، جوانییەکی تایبەتیان هەبوو. 🤍",
+  "کات تێدەپەڕی و ئەو کوڕە هەنگاو بە هەنگاو گەورەتر دەبوو.",
+  "هەندێ هەست لە ناخیدا هەبوون کە بە وشە ئاسان نەدەبوو باس بکرێن.",
+  "هەندێ جار بێدەنگ دەبوو و لە دڵی خۆی بیر دەکردەوە.",
+  "بەڵام لە ناو دڵیدا هێشتا هیوای ڕۆژانی جوانی هەبوو. 🌸",
+  "هەر کەسێک شایەنی ئارامی و خۆشییە.",
+  "هەندێ جار تەنها پێویستە کەسێک گوێت لێ بگرێت و تێت بگات.",
   "ژیان هەمیشە ئاسان نییە، بەڵام هەر ڕۆژێک دەرفەتێکی نوێیە. ☀️",
-  "هەندێ ڕۆژ پڕ لە خەندەن و هەندێ ڕۆژ پڕ لە بیرکردنەوە.",
-  "بەڵام دوای هەر شەوێک، ڕۆژێکی نوێ دێتەوە.",
-  "ئاران گیان، هیوادارم دڵت هەمیشە ئارام و لێوت پڕ لە خەندە بێت. 💗",
+  "هیوادارم دڵت هەمیشە ئارام بێت و خەندە لەسەر لێوت بمێنێتەوە.",
   "هیوادارم هەموو خەونە جوانەکانت ببنە ڕاستی.",
-  "هیوادارم هەمیشە کەسانێکت لە دەوروبەر بن کە بە دڵەوە خۆشییانت بوێت.",
-  "تۆ شایەنی ڕۆژانی جوان و ساتە خۆشەکانیت. 🌸",
-  "وەک گوڵێک کە بە ئارامی گەشە دەکات، هیوادارم ژیانتیش پڕ لە جوانی بێت.",
-  "هەنگاو بە هەنگاو، بە هیوایەکی نوێ و دڵێکی ئارام.",
-  "هەرگیز خەونە جوانەکانت لەبیر مەکە، تەنانەت ئەگەر ڕێگاکە درێژ بێت.",
-  "هەمیشە بە خۆت باوەڕت هەبێت و بە جوانیی دڵت شانازی بکەیت. 🤍",
   "پەنجەیەک کە هەست بە نەرمی ڕوومەتە سوورەکانی بکات. 🌹",
-  "ساتێکی ئارام، نیگایەکی جوان و خەندەیەک کە لە دڵەوە بێت.",
   "هەندێ جوانی بە وشە ناگوترێت؛ تەنها بە هەست دەناسرێت.",
-  "ئاران گیان، هیوادارم ژیانت هەمیشە پڕ لە ئارامی و خۆشی بێت.",
-  "ئەو ڕۆژە دێت، ئاران گیان، ژیانێکی جوان وەک ناوەکەی خۆت ئارام و جوان و گەشاوە و پڕ گوڵ. 🌸",
-  "هیوادارم خەندە هەمیشە ڕێگای بۆ دڵت بدۆزێتەوە.",
-  "هیوادارم هەر ڕۆژێک شتێکی جوان بۆ خۆشی دڵت هەبێت.",
-  "هەمیشە جوان بمێنەوە، جوانکیلەی دڵ. 💗",
-  "خواحافیز جوانکیلە ❤️🌹"
+  "ئاران گیان، تۆ شایەنی ڕۆژانی جوان و دڵێکی پڕ لە خۆشییت. 💗",
+  "هیوادارم هەر ڕۆژێک شتێکی جوان بۆ خەنداندنت هەبێت.",
+  "ئەو ڕۆژە دێت ئاران گیان ژیانێکی جوان وەک ناوەکەی خۆت ئارام و جوان و گەشاوە و پڕ گوڵ. 🌸",
+  "هەمیشە جوان بمێنەوە، ئارانی جوانکیلە.",
+  "خواحافیز جوانکیلە ❤️"
 ];
 
 let index = -1;
@@ -286,17 +284,17 @@ prev.addEventListener("click", () => {
   if (index > 0) showSentence(index - 1);
 });
 
-const hearts = document.getElementById("hearts");
+const petals = document.getElementById("petals");
 
 for (let i = 0; i < 22; i++) {
-  const heart = document.createElement("span");
-  heart.className = "heart";
-  heart.textContent = ["♡", "♥", "🌸", "✿"][i % 4];
-  heart.style.left = Math.random() * 100 + "%";
-  heart.style.animationDelay = Math.random() * 10 + "s";
-  heart.style.animationDuration = (8 + Math.random() * 8) + "s";
-  heart.style.fontSize = (14 + Math.random() * 18) + "px";
-  hearts.appendChild(heart);
+  const item = document.createElement("span");
+  item.className = "petal";
+  item.textContent = ["♡", "♥", "🌸", "✿"][i % 4];
+  item.style.left = Math.random() * 100 + "%";
+  item.style.animationDelay = Math.random() * 10 + "s";
+  item.style.animationDuration = (8 + Math.random() * 8) + "s";
+  item.style.fontSize = (14 + Math.random() * 18) + "px";
+  petals.appendChild(item);
 }
 
 let audioContext;
@@ -335,7 +333,7 @@ function playNote(frequency) {
 }
 
 document.getElementById("music").addEventListener("click", async () => {
-  const musicButton = document.getElementById("music");
+  const button = document.getElementById("music");
 
   if (!musicPlaying) {
     try {
@@ -347,7 +345,7 @@ document.getElementById("music").addEventListener("click", async () => {
       }
 
       musicPlaying = true;
-      musicButton.textContent = "♫ دەنگەکە بوەستێنە";
+      button.textContent = "♫ دەنگەکە بوەستێنە";
 
       playNote(melody[noteIndex % melody.length]);
       noteIndex++;
@@ -357,12 +355,12 @@ document.getElementById("music").addEventListener("click", async () => {
         noteIndex++;
       }, 650);
     } catch (error) {
-      musicButton.textContent = "دەنگەکە کار ناکات";
+      button.textContent = "دەنگەکە کار ناکات";
     }
   } else {
     musicPlaying = false;
     clearInterval(musicTimer);
-    musicButton.textContent = "♫ دەنگی ئارام چالاک بکە";
+    button.textContent = "♫ دەنگی ئارام چالاک بکە";
   }
 });
 </script>
