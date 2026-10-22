@@ -4,17 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>چیرۆکێک بۆ ئاران 💗</title>
+<title>ئارانی جوانکیلە 💗</title>
 
 <style>
-:root {
-  --bg1: #ffeef5;
-  --bg2: #efe6ff;
-  --tx: #6b3a55;
-  --ac: #e07aa8;
-  --card: rgba(255,255,255,.78);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -22,13 +14,13 @@
 body {
   margin: 0;
   min-height: 100vh;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px;
   font-family: Tahoma, Arial, sans-serif;
-  color: var(--tx);
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  color: #75415d;
+  background: linear-gradient(135deg, #ffe8f1, #eee4ff, #fff1f7);
   overflow-x: hidden;
 }
 
@@ -37,15 +29,14 @@ body {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 0;
 }
 
 .heart {
   position: absolute;
   bottom: -40px;
   color: #e07aa8;
-  opacity: .45;
-  animation: floatUp 10s linear infinite;
+  opacity: .5;
+  animation: floatUp 12s linear infinite;
 }
 
 @keyframes floatUp {
@@ -53,59 +44,53 @@ body {
     transform: translateY(0) rotate(0deg);
     opacity: 0;
   }
-  15% { opacity: .5; }
+  20% {
+    opacity: .5;
+  }
   to {
-    transform: translateY(-115vh) rotate(35deg);
+    transform: translateY(-115vh) rotate(40deg);
     opacity: 0;
   }
 }
 
 .card {
-  width: 100%;
-  max-width: 620px;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 600px;
+  padding: 30px 22px;
   text-align: center;
-  padding: 32px 23px;
   border-radius: 28px;
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,.9);
-  box-shadow: 0 18px 55px rgba(150,80,125,.15);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,.8);
+  border: 1px solid white;
+  box-shadow: 0 15px 50px rgba(180,100,145,.18);
 }
 
-.flower {
-  font-size: 36px;
-  margin-bottom: 6px;
+.flowers {
+  font-size: 34px;
+  margin-bottom: 12px;
 }
 
 h1 {
-  color: #c65389;
-  font-size: 28px;
-  margin: 8px 0;
-}
-
-.subtitle {
-  font-size: 14px;
-  opacity: .8;
-  margin-bottom: 25px;
+  margin: 8px 0 25px;
+  color: #cb5d91;
+  font-size: 30px;
 }
 
 .story-box {
-  min-height: 180px;
+  min-height: 200px;
+  padding: 25px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 15px;
   border-radius: 22px;
-  background: rgba(255,240,248,.8);
-  border: 1px solid #f7d4e5;
+  background: #fff1f7;
+  border: 1px solid #f5d4e4;
 }
 
 #story {
   font-size: 21px;
   line-height: 2.1;
-  opacity: 1;
   transition: opacity .3s, transform .3s;
 }
 
@@ -115,81 +100,80 @@ h1 {
 }
 
 .counter {
+  margin-top: 16px;
   font-size: 13px;
-  margin-top: 15px;
-  color: #a55c80;
+  color: #ad6386;
 }
 
 .progress {
   height: 5px;
-  background: #f4d5e4;
-  border-radius: 10px;
-  margin: 10px 0 22px;
+  margin: 12px 0 22px;
   overflow: hidden;
+  border-radius: 20px;
+  background: #f5d6e5;
 }
 
 #bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg,#e07aa8,#b59be9);
+  background: linear-gradient(90deg, #e07aa8, #b89ae9);
   transition: width .3s;
 }
 
 .buttons {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
 button {
-  border: none;
-  border-radius: 30px;
-  padding: 12px 20px;
-  font-size: 15px;
   font-family: inherit;
+  font-size: 15px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
   cursor: pointer;
-  transition: transform .2s;
-}
-
-button:active {
-  transform: scale(.96);
 }
 
 .primary {
   color: white;
-  background: linear-gradient(135deg,#e07aa8,#c77bb8);
-  box-shadow: 0 5px 15px #e8b3d0;
+  background: linear-gradient(135deg, #e07aa8, #c77bb8);
+  box-shadow: 0 5px 15px #f0c5dc;
 }
 
 .secondary {
-  color: #9b5277;
+  color: #a4537c;
   background: #fff0f7;
   border: 1px solid #f3d0e2;
 }
 
-.music-note {
-  margin-top: 20px;
-  font-size: 12px;
-  opacity: .7;
-  line-height: 1.8;
-}
-
-.footer {
-  margin-top: 24px;
-  font-size: 13px;
-  color: #a55c80;
+button:active {
+  transform: scale(.97);
 }
 
 #music {
-  margin-top: 13px;
+  margin-top: 15px;
 }
 
-@media (max-width: 420px) {
-  .card { padding: 25px 16px; }
-  h1 { font-size: 24px; }
-  #story { font-size: 18px; }
-  .story-box { min-height: 190px; }
+.footer {
+  margin-top: 23px;
+  color: #b06488;
+  font-size: 14px;
+}
+
+@media(max-width:420px) {
+  .card {
+    padding: 25px 15px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  #story {
+    font-size: 18px;
+  }
 }
 </style>
 </head>
@@ -199,70 +183,65 @@ button:active {
 <div class="hearts" id="hearts"></div>
 
 <main class="card">
-  <div class="flower">🌸 💗 🌸</div>
-  <h1>چیرۆکێک بۆ ئاران</h1>
-  <div class="subtitle">چیرۆکێکی بچووک، بەڵام لە دڵێکی پڕ لە هەستەوە ❤️</div>
+  <div class="flowers">🌸 💗 🌸</div>
 
-  <section class="story-box">
-    <div id="story">ئەم چیرۆکە بە کرتەیەک دەست پێ دەکات... 🌷</div>
-  </section>
+  <h1>ئارانی جوانکیلە 🌸💗</h1>
 
-  <div class="counter" id="counter">ئامادەی؟ 💕</div>
-  <div class="progress"><div id="bar"></div></div>
+  <div class="story-box">
+    <div id="story">کرتەیەک بکە، جوانکیلە 💗</div>
+  </div>
+
+  <div class="counter" id="counter">بە دڵەوە بۆ تۆ 🌷</div>
+
+  <div class="progress">
+    <div id="bar"></div>
+  </div>
 
   <div class="buttons">
-    <button class="secondary" id="prev">→ پێشوو</button>
-    <button class="primary" id="next">دەست پێ بکە 🌸</button>
+    <button class="secondary" id="prev">پێشوو</button>
+    <button class="primary" id="next">بەردەوام بە 💗</button>
   </div>
 
   <button class="secondary" id="music">♫ دەنگی ئارام چالاک بکە</button>
 
-  <div class="music-note">
-    بە هەر کرتەیەک، دەرگایەکی نوێ لە چیرۆکەکە دەکرێتەوە... 💌
-  </div>
-
-  <div class="footer">بە هەموو جوانییەکانی دڵەوە بۆ تۆ، ئاران گیان 🌹</div>
+  <div class="footer">🌷 💗 🌷</div>
 </main>
 
 <script>
 const sentences = [
-  "لە ڕۆژی ١/١/٢٠٠٧، کوڕێک لە جیهاندا لەدایک بوو. 🌙",
-  "ڕۆژێکی نوێ هاتبوو، بەڵام ئەو کوڕە خۆی جوانییەکی تایبەتی لەگەڵ خۆیدا هێنابوو. ✨",
-  "ڕۆحێکی پاک، دڵێک سپی وەک بەفر، و نیگایەک پڕ لە هیوای بێکۆتایی. 🤍",
-  "کات تێدەپەڕی و ئەو کوڕە هەر ڕۆژێک گەورەتر دەبوو.",
-  "بەڵام لە ناو دڵیدا هەستێکی تایبەتی هەبوو کە هەمیشە ناتوانی بە ئاسانی باسی بکات. 💭",
-  "هەندێ جار بێدەنگی دەبووە باشترین هاوڕێی.",
-  "هەندێ جار تەنها بیرکردنەوە بوو کە دەتوانی هەموو ئەو هەستانە لە خۆی بگرێت.",
-  "ئەو هەوڵی دەدا هەموو شتێک لە ناو دڵیدا بشارێتەوە. 🌧️",
-  "بەڵام دڵ، هەمیشە هەموو ڕازێک بۆ هەتاهەتایە ناشارێتەوە.",
-  "ڕۆژێک هات کە خۆی لە خۆی پرسیاری کرد...",
-  "بۆچی من وا هەستم هەیە؟ 🤍",
-  "بۆچی هەندێ شت بۆ من جیاوازە؟",
-  "بۆچی هەندێ هەست بە وشە ناتوانرێت باس بکرێت؟",
-  "ئەو پرسیارانە لە دڵیدا دەسووڕانەوە، وەک ئەستێرە لە ئاسمانێکی تاریکدا. 🌌",
-  "بەڵام لەگەڵ هەموو ئەو بیرکردنەوانەش، ئەو هێشتا هیوای بە ڕۆژانی جوان هەبوو.",
-  "چونکە هەر دڵێک، هەرچەندە بێدەنگ بێت، شایەنی ئارامی و خۆشەویستییە. 💗",
-  "هەندێ جار تەنها پێویستە کەسێک گوێت لێ بگرێت.",
-  "کەسێک کە بەبێ پرسیارکردن، هەستەکانت تێبگات.",
-  "کەسێک کە لەگەڵیدا دەتوانیت خۆت بیت، بەبێ ترس و بەبێ شاردنەوە. 🌷",
-  "ژیان هەمیشە بە ئاسانی ناڕوات، بەڵام هەر ڕۆژێک دەرفەتێکی نوێیە.",
-  "هەندێ ڕۆژ پڕ لە خەندەن، هەندێ ڕۆژ پڕ لە بیرکردنەوە.",
-  "بەڵام هیچ شەوێک هەتاهەتایە نامێنێت؛ ڕۆژ هەمیشە دووبارە دێتەوە. ☀️",
-  "ئاران گیان، تۆش شایەنی ڕۆژانی ئارام و دڵێکی پڕ لە خۆشییت.",
-  "شایەنی خەندەیەک کە لە دڵەوە بێت، نەک تەنها لەسەر لێوەکانت.",
-  "شایەنی خەونەکانیت، هەرچەندە گەورە و دوور بن. 🌠",
-  "شایەنی ئەوەیت کە ڕۆژێک سەیری ڕابردووت بکەیت و بە خۆت بڵێیت: من زۆر بەهێز بووم.",
-  "لەوانەیە هەموو کەس نەتوانێت هەستەکانت تێبگات.",
-  "بەڵام ئەوە واتای ئەوە نییە کە هەستەکانت کەمتر گرنگن.",
-  "تۆ بەو شێوەیەی کە هەیت، گرنگیت. 💗",
-  "وەک گوڵێک کە بە ئارامی گەشە دەکات، ژیانتیش دەتوانێت پڕ لە جوانی بێت.",
-  "هەنگاو بە هەنگاو، بە هیوایەکی بچووک و دڵێکی ئارام.",
-  "ئەم چیرۆکە کۆتایی هاتووە، بەڵام چیرۆکی ژیانت هێشتا بەردەوامە. 🌹",
-  "ئەو ڕۆژە دێت، ئاران گیان، ژیانێکی جوان وەک ناوەکەی خۆت، ئارام و جوان و گەشاوە و پڕ گوڵ.",
+  "لە ڕۆژی ١/١/٢٠٠٧، کوڕێک لەدایک بوو. 🌙",
+  "ڕۆحێکی پاک، دڵێک سپی وەک بەفر، و هەستێکی جوان لە ناخیدا هەبوو. 🤍",
+  "بە تێپەڕبوونی کات، ئەو کوڕە گەورەتر دەبوو و جیهانیش بۆی فراوانتر دەبوو.",
+  "لە ناو دڵیدا هەست و بیرکردنەوەی تایبەتی هەبوون.",
+  "هەندێ جار هەستی دەکرد کە وشەکان ناتوانن هەموو ئەوەی لە دڵیدایە دەرببڕن.",
+  "بۆیە هەندێ شت لە ناخیدا دەهێشتەوە و بێدەنگ دەبوو. 💭",
+  "بەڵام دڵ هەمیشە ڕازەکانی خۆی بە تەواوی ناشارێتەوە.",
+  "ڕۆژێک هات کە لە خۆی پرسی: بۆچی من وا هەستم هەیە؟",
+  "بۆچی هەندێ هەست ئەوەندە قووڵن کە بە وشە باس ناکرێن؟",
+  "لەگەڵ هەموو ئەو پرسیارانە، هێشتا هیوای بە ڕۆژانی جوان هەبوو. 🌷",
+  "چونکە هەر کەسێک شایەنی ئارامی، خۆشی و خۆشەویستییە.",
+  "هەندێ جار تەنها پێویستە کەسێک گوێت لێ بگرێت و بە دڵەوە تێت بگات.",
+  "کەسێک کە لەگەڵیدا بتوانیت خۆت بیت، بەبێ ترس و شاردنەوە.",
+  "ژیان هەمیشە ئاسان نییە، بەڵام هەر ڕۆژێک دەرفەتێکی نوێیە. ☀️",
+  "هەندێ ڕۆژ پڕ لە خەندەن و هەندێ ڕۆژ پڕ لە بیرکردنەوە.",
+  "بەڵام دوای هەر شەوێک، ڕۆژێکی نوێ دێتەوە.",
+  "ئاران گیان، هیوادارم دڵت هەمیشە ئارام و لێوت پڕ لە خەندە بێت. 💗",
+  "هیوادارم هەموو خەونە جوانەکانت ببنە ڕاستی.",
+  "هیوادارم هەمیشە کەسانێکت لە دەوروبەر بن کە بە دڵەوە خۆشییانت بوێت.",
+  "تۆ شایەنی ڕۆژانی جوان و ساتە خۆشەکانیت. 🌸",
+  "وەک گوڵێک کە بە ئارامی گەشە دەکات، هیوادارم ژیانتیش پڕ لە جوانی بێت.",
+  "هەنگاو بە هەنگاو، بە هیوایەکی نوێ و دڵێکی ئارام.",
+  "هەرگیز خەونە جوانەکانت لەبیر مەکە، تەنانەت ئەگەر ڕێگاکە درێژ بێت.",
+  "هەمیشە بە خۆت باوەڕت هەبێت و بە جوانیی دڵت شانازی بکەیت. 🤍",
+  "پەنجەیەک کە هەست بە نەرمی ڕوومەتە سوورەکانی بکات. 🌹",
+  "ساتێکی ئارام، نیگایەکی جوان و خەندەیەک کە لە دڵەوە بێت.",
+  "هەندێ جوانی بە وشە ناگوترێت؛ تەنها بە هەست دەناسرێت.",
+  "ئاران گیان، هیوادارم ژیانت هەمیشە پڕ لە ئارامی و خۆشی بێت.",
+  "ئەو ڕۆژە دێت، ئاران گیان، ژیانێکی جوان وەک ناوەکەی خۆت ئارام و جوان و گەشاوە و پڕ گوڵ. 🌸",
   "هیوادارم خەندە هەمیشە ڕێگای بۆ دڵت بدۆزێتەوە.",
-  "هیوادارم ئارامی ببێتە هاوڕێی هەموو ڕۆژەکانت. 🌸",
-  "و ئەگەر ڕۆژێک ئەم چیرۆکە بخوێنیتەوە، بیرت بێت کە هەرگیز خۆشی و هیوا لەبیر مەکە.",
-  "خواحافیز، خۆشمدەوێی ❤️🌹"
+  "هیوادارم هەر ڕۆژێک شتێکی جوان بۆ خۆشی دڵت هەبێت.",
+  "هەمیشە جوان بمێنەوە، جوانکیلەی دڵ. 💗",
+  "خواحافیز جوانکیلە ❤️🌹"
 ];
 
 let index = -1;
@@ -283,20 +262,16 @@ function showSentence(newIndex) {
     story.textContent = sentences[index];
     story.classList.remove("fade");
 
-    counter.textContent =
-      `بەشی ${index + 1} لە ${sentences.length} 💗`;
+    counter.textContent = `${index + 1} / ${sentences.length}`;
+    bar.style.width = ((index + 1) / sentences.length * 100) + "%";
 
-    bar.style.width =
-      ((index + 1) / sentences.length * 100) + "%";
-
-    next.textContent =
-      index === sentences.length - 1
-        ? "خواحافیز، خۆشمدەوێی ❤️"
-        : "بەردەوام بە 🌸";
+    next.textContent = index === sentences.length - 1
+      ? "خواحافیز جوانکیلە ❤️"
+      : "بەردەوام بە 💗";
 
     prev.disabled = index === 0;
-    prev.style.opacity = index === 0 ? ".45" : "1";
-  }, 220);
+    prev.style.opacity = index === 0 ? ".4" : "1";
+  }, 200);
 }
 
 next.addEventListener("click", () => {
@@ -304,12 +279,6 @@ next.addEventListener("click", () => {
     showSentence(0);
   } else if (index < sentences.length - 1) {
     showSentence(index + 1);
-  } else {
-    story.classList.add("fade");
-    setTimeout(() => {
-      story.textContent = "خواحافیز، خۆشمدەوێی ❤️🌹";
-      story.classList.remove("fade");
-    }, 220);
   }
 });
 
@@ -318,6 +287,7 @@ prev.addEventListener("click", () => {
 });
 
 const hearts = document.getElementById("hearts");
+
 for (let i = 0; i < 22; i++) {
   const heart = document.createElement("span");
   heart.className = "heart";
@@ -352,7 +322,7 @@ function playNote(frequency) {
 
   gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
   gain.gain.exponentialRampToValueAtTime(
-    0.045, audioContext.currentTime + 0.08
+    0.035, audioContext.currentTime + 0.08
   );
   gain.gain.exponentialRampToValueAtTime(
     0.0001, audioContext.currentTime + 0.65
@@ -360,7 +330,6 @@ function playNote(frequency) {
 
   oscillator.connect(gain);
   gain.connect(audioContext.destination);
-
   oscillator.start();
   oscillator.stop(audioContext.currentTime + 0.7);
 }
@@ -378,7 +347,7 @@ document.getElementById("music").addEventListener("click", async () => {
       }
 
       musicPlaying = true;
-      musicButton.textContent = "♫ دەنگی ئارام بوەستێنە";
+      musicButton.textContent = "♫ دەنگەکە بوەستێنە";
 
       playNote(melody[noteIndex % melody.length]);
       noteIndex++;
@@ -388,7 +357,7 @@ document.getElementById("music").addEventListener("click", async () => {
         noteIndex++;
       }, 650);
     } catch (error) {
-      musicButton.textContent = "دەنگەکە لەم وێبگەڕەدا کار ناکات";
+      musicButton.textContent = "دەنگەکە کار ناکات";
     }
   } else {
     musicPlaying = false;
