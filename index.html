@@ -1,209 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="ckb" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ئارانی جوانکیلە 💗</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>چیڕۆک</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
 <style>
-* {
-  box-sizing: border-box;
+:root{
+  --bg:#cfe6f7; --bg2:#e4f1fb; --ink:#35566f; --bear:#f9bcd3; --bear-d:#f08fb4; --blush:#f4799f; --nose:#c95a82;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-family: Tahoma, Arial, sans-serif;
-  background: linear-gradient(145deg, #e4f4ff, #d8e9ff, #f4eaff);
-  color: #425c83;
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#1c2e3f; --bg2:#27415a; --ink:#e2f0fb; --bear:#f4a9c6; --bear-d:#e27da6; }
 }
-
-.card {
-  width: 90%;
-  max-width: 520px;
-  min-height: 420px;
-  padding: 30px 22px;
-  border-radius: 30px;
-  text-align: center;
-  background: rgba(255,255,255,0.72);
-  border: 2px solid rgba(255,255,255,0.9);
-  box-shadow: 0 15px 45px rgba(101,135,190,0.18);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+:root[data-theme="dark"]{ --bg:#1c2e3f; --bg2:#27415a; --ink:#e2f0fb; --bear:#f4a9c6; --bear-d:#e27da6; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:radial-gradient(120% 90% at 50% 0%, var(--bg2), var(--bg));
+  color:var(--ink); font-family:"Vazirmatn","Noto Naskh Arabic",Tahoma,sans-serif;
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  overflow:hidden; -webkit-tap-highlight-color:transparent;
 }
-
-h1 {
-  font-size: 27px;
-  margin: 0 0 24px;
-  color: #668ac1;
+.stage{flex:1; width:100%; max-width:34rem; display:flex; align-items:center; justify-content:center; padding:2rem 1.75rem 0}
+#line{
+  margin:0; text-align:center; font-size:clamp(1.35rem,5.2vw,1.9rem); line-height:2; font-weight:600;
+  white-space:pre-line; opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease;
 }
-
-#sentence {
-  font-size: 21px;
-  line-height: 2.1;
-  min-height: 125px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: appear .5s ease;
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.bear-button {
-  border: none;
-  background: #ffe5f0;
-  width: 105px;
-  height: 105px;
-  border-radius: 50%;
-  margin-top: 12px;
-  font-size: 62px;
-  cursor: pointer;
-  box-shadow: 0 7px 18px rgba(224,139,177,0.25);
-  transition: transform .2s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.bear-button:active {
-  transform: scale(.88);
-}
-
-.hint {
-  font-size: 13px;
-  color: #8198b8;
-  margin-top: 13px;
-}
-
-.counter {
-  position: absolute;
-  bottom: 13px;
-  font-size: 12px;
-  color: #9baecb;
-}
-
-.flower {
-  position: fixed;
-  pointer-events: none;
-  opacity: .6;
-  animation: float 7s linear infinite;
-}
-
-@keyframes float {
-  from { transform: translateY(110vh) rotate(0deg); }
-  to { transform: translateY(-15vh) rotate(360deg); }
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-  <h1>ئارانی جوانکیلە 🌸💗</h1>
-
-  <div id="sentence">کلیک لەسەر ورچە پەمەییەکە بکە 🧸</div>
-
-  <button class="bear-button" id="bear" aria-label="ڕستەی دواتر">
-    🧸
-  </button>
-
-  <div class="hint" id="hint">ورچەکە لێ بدە بۆ ئەوەی ڕستەی دواتر ببینیت 💗</div>
-  <div class="counter" id="counter"></div>
-</div>
-
-<script>
-const sentences = [
-"لە 1\\1\\2007 کورێک هاتە ژیان",
-"ڕوحێکی پاک دڵێکی سپی وەک بەفر",
-"دوای گەوربوونی وردە وردە هەستی گرد جیاوازە",
-"لە ناخی خۆی هێشتیە هەوڵیدا نهێنیبێت",
-"بەڵام ڕۆژێک لە ڕۆژان بیریکردوە",
-"بۆچی من وام ؟؟ بۆچیی؟؟؟ ئێم وایە هەڵەیە وابم",
-"نااا من وەک خۆم دەژیم نەک وەگ و ئەوی ئەوان دەیانەوێ",
-"نهێنیەکەی ئاشکرا کرد کە چەند ساڵێک لە دڵی پاکی خۆی هەڵگرت بوو",
-"پێیو وابوو هەموو کەسێ لێی تێدەگە لە هەستەکانی وە لایان ئاسای دەبێت",
-"بەڵام",
-"پێچەوانەکەی دەرچو دژیایەتی قبوڵنەکردن کۆمەڵگە فشاری دەرونی هەستی نامۆی",
-"بۆ ساتێک وەستە بیری کردوە وە وتی ئایا من هەڵەم ؟ ئایە کێشەیکی گەورم دروست کردوە؟؟",
-"پسیار و پسیارو پسیار ؟؟ بۆچی؟ بۆچی؟ بۆچی؟",
-"بەڵام بریاری دە کە ڕوو بە ڕووی کۆمڵگایک ببێتەوە وە ئەوژیان بژی کە خۆی بۆخۆی هەڵدەبژێرێ",
-"هەزارن و هەزارن نیشانی پسیار ؟ لەسەری کۆبوویەوە",
-"گۆمڵگە دەیپرسی بۆچی وای؟ بۆچی والەخۆت دەکەی ؟ بۆچی دەتەوێت وابی ؟ تۆ پیاوی نابێ وابی ؟؟؟",
-"بەڵام کەس نەیپرسی پیارێکی گرنگی نەکرد",
-"پێ ویستت بەیارمەتی هەیە؟ دەتەوێ پیاسەیەکی ژێر بارانی نەرم بکەین تا ئاسودەبی ؟؟؟",
-"دەتەوێت هەندێ گوڵ بچێنین ؟؟؟ چی دەرباری سەیرکدنی فلمێک بەدڵی تۆبێت",
-"حەزت لەچ چالاکیەک ؟ چ ئاژەڵێکت بەدڵە؟",
-"نااااا واز لەپسیارەکان بێنە",
-"تەنها باوشکێی ئارام لت بەهاران باوشێکی گەرم لە سارردر زسات کە بە ئارایمی تێیدا بخەوێ",
-"بەهەرحاڵ ڕۆژێک دێت بەڵێ بەڵێ ڕۆژێک دێت",
-"نیوەکەی خۆت دەدۆزیەوە کە ئەوی قبوڵە وەک خۆی",
-"کە ئامادەی قژی شانەبکە",
-"ئامادەیە دڵە پاکەکی لەناو دەستەکانی دابنێ",
-"ئەو کەسە دڵکی گەوریە هەیە کە تێیدا بمێنێتەوە",
-"دڵێک وەگ قۆریەکی حەلادین ههههه هەموو شتێکی تێدابێت هههههه",
-"وە مێشکێک کە بەرگەی پرتە پرتەکەی بگرێ 😳",
-"چاوێک بەرگەی جوانیەکی بگرێ",
-"گوێیەک بەرگەی دەنگە و نازاکانی بگرێت",
-"پەنجەیەک کە هەست بە نەرمی ڕوومەتەکانی بکەت",
-"بەڵێ ڕۆژێک ئەوکەسە دێت وەک.،،،،
-",
-"سوارچاکێک بەڵام بە ئوتۆمبێلێکی تێسلا ههههههههه چونکە مۆدیل ئەسپ نەماوە 😁",
-"بەیەکەوە دەبن لە باوشێکی گەرم ماڵێکی پڕ لە خۆشەویستی دڵێکی پر لە میهرەبانی",
-"ئەو ڕۆژە دێ ئاران تەنها چاوێبە ژیانت وەک ناوت جوان و ئارام و پڕ لە گوڵی گەشاوە دەبێت",
-"خوا حافیز خۆشەویستم😘"
-];
-
-let index = -1;
-
-const sentence = document.getElementById("sentence");
-const bear = document.getElementById("bear");
-const counter = document.getElementById("counter");
-const hint = document.getElementById("hint");
-
-bear.addEventListener("click", () => {
-  if (index < sentences.length - 1) {
-    index++;
-    sentence.style.animation = "none";
-    void sentence.offsetWidth;
-    sentence.style.animation = "appear .5s ease";
-    sentence.textContent = sentences[index];
-    counter.textContent = (index + 1) + " / " + sentences.length;
-
-    if (index === sentences.length - 1) {
-      hint.textContent = "💗🌹";
-      bear.textContent = "💗";
-    } else {
-      hint.textContent = "کلیکێکی تر بکە 🩵";
-    }
-  } else {
-    index = -1;
-    sentence.textContent = "ئارانی جوانکیلە 🌸💗";
-    counter.textContent = "";
-    hint.textContent = "لە نوێوە دەست پێ بکە 🩵";
-    bear.textContent = "🧸";
-  }
-});
-
-for (let i = 0; i < 12; i++) {
-  const flower = document.createElement("div");
-  flower.className = "flower";
-  flower.textContent = ["🌸", "🩵", "🌷", "✨"][i % 4];
-  flower.style.left = Math.random() * 100 + "vw";
-  flower.style.animationDelay = Math.random() * 7 + "s";
-  flower.style.fontSize = (14 + Math.random() * 15) + "px";
-  document.body.appendChild(flower);
-}
-</script>
-
-</body>
-</html>
+#line.on{opacity:1; transform:none}
+.dock{padding:1rem 0 1.5rem; display:flex; justify-content:center}
+#bear{
